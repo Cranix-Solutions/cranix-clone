@@ -19,22 +19,25 @@ do
 done
 
 DATE=`date +%Y-%m-%d:%H-%M`
-if [ -e /etc/xinetd.d/tftp ]
-then
+if [ -e /etc/xinetd.d/tftp ]; then
   cp /etc/xinetd.d/tftp /etc/xinetd.d/tftp.$DATE
 fi
 cp /etc/xinetd.d/tftp.in /etc/xinetd.d/tftp
-if [ ! -e /usr/share/cranix/templates/pxeboot ]
-then
+
+if [ ! -e /usr/share/cranix/templates/pxeboot ]; then
     cp /usr/share/cranix/templates/pxeboot.in /usr/share/cranix/templates/pxeboot
+else
+    sed -i -e s#clone/initrd#boot/initrd#g -e s#clone/linux#boot/linux#g /usr/share/cranix/templates/pxeboot
 fi
-if [ ! -e /usr/share/cranix/templates/efiboot ]
-then
+
+if [ ! -e /usr/share/cranix/templates/efiboot ]; then
     cp /usr/share/cranix/templates/efiboot.in /usr/share/cranix/templates/efiboot
+else
+    sed -i -e s#clone/initrd#boot/initrd#g -e s#clone/linux#boot/linux#g /usr/share/cranix/templates/efiboot
 fi
-if [ ! -e /srv/itool/config/WinDomain.xml ]
-then
-        cp /srv/itool/config/WinDomain.xml.templ /srv/itool/config/WinDomain.xml
+
+if [ ! -e /srv/itool/config/WinDomain.xml ]; then
+    cp /srv/itool/config/WinDomain.xml.templ /srv/itool/config/WinDomain.xml
 fi
 
 /usr/bin/wget http://downloads.cephalix.eu/boot/initrd -O /srv/tftp/boot/initrd
