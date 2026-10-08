@@ -15,6 +15,7 @@ install:
 	install -m 755 $(INSTUSER)  config/Win_clean.ps1         $(DESTDIR)/usr/share/cranix/templates/
 
 	#configure tftp service
+	mkdir -p $(DESTDIR)/srv/tftp/
 	rsync -aAv tftp/ $(DESTDIR)/srv/tftp/
 
 	#configure itool service
