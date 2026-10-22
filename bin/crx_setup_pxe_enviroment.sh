@@ -34,6 +34,7 @@ if [ ! -e /usr/share/cranix/templates/efiboot ]; then
     cp /usr/share/cranix/templates/efiboot.in /usr/share/cranix/templates/efiboot
 else
     sed -i -e s#clone/initrd#boot/initrd#g -e s#clone/linux#boot/linux#g /usr/share/cranix/templates/efiboot
+    sed -i -e s/linuxefi/linux/ -e s/initrdefi/initrd/ /usr/share/cranix/templates/efiboot
 fi
 
 if [ ! -e /srv/itool/config/WinDomain.xml ]; then
