@@ -1,8 +1,7 @@
 #!/bin/bash
 trap "" 0 1 2 5 15
 
-export IVERSION="4.5"
-export IBUILD="#DATE#"
+export IVERSION="#DATE#"
 export CTOOLNAME="CRANIX Clone Tool ${IVERSION}"
 
 mkdir -p /mnt/itool
