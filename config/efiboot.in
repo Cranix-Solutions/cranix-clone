@@ -2,8 +2,8 @@ timeout=1
 
 menuentry 'Automatic Cloning' {
   echo 'Loading kernel ...'
-  linuxefi boot/linux root=live:ftp://install/boot/squashfs.img ip=dhcp init=/bin/start_itool STARTCMD=clone SLEEP=1 dhcptimeout=120 insecure=1 PARTITIONS=#PARTITIONS# MODUS=AUTO MULTICAST=1
+  linux boot/linux root=live:ftp://install/boot/squashfs.img ip=dhcp init=/bin/start_itool STARTCMD=clone SLEEP=1 dhcptimeout=120 insecure=1 PARTITIONS=#PARTITIONS# MODUS=AUTO MULTICAST=1
   echo 'Loading initial ramdsik ...'
-  initrdefi boot/initrd
+  initrd boot/initrd
 }
 
