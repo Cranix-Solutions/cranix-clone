@@ -40,7 +40,7 @@ fi
 if [ ! -e /srv/itool/config/WinDomain.xml ]; then
     cp /srv/itool/config/WinDomain.xml.templ /srv/itool/config/WinDomain.xml
 fi
-
+mkdir -p /srv/tftp/boot /srv/ftp/agama
 /usr/bin/wget http://downloads.cephalix.eu/boot/initrd -O /srv/tftp/boot/initrd
 /usr/bin/wget http://downloads.cephalix.eu/boot/linux -O /srv/tftp/boot/linux
 /usr/bin/wget http://downloads.cephalix.eu/boot/squashfs.img -O /srv/ftp/agama/squashfs.img
