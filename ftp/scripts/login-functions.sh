@@ -28,11 +28,11 @@ auto_login()
         echo "HOSTNAME=${HOSTNAME}" >> /tmp/apiparams
 	WORKGROUP=$( curl --insecure -X GET --header 'Accept: text/plain' --header "Authorization: Bearer $TOKEN" "https://${SERVER}/api/system/configuration/WORKGROUP" )
 	echo "domain=${WORKGROUP}"   >> /tmp/credentials
-        bash ${CDEBUG} /root/${STARTCMD}.sh
+        bash ${CDEBUG} /root/clone.sh
         curl --insecure -X DELETE --header 'Content-Type: application/json' --header 'Accept: application/json' --header "Authorization: Bearer $TOKEN" "https://${SERVER}/api/sessions/$TOKEN"
         exit 0
     fi
-    dialog  --backtitle "${STARTCMD}" --title "Anmeldung" --yesno "$WARNING" 15 60
+    dialog  --backtitle "${CTOOLNAME}" --title "Anmeldung" --yesno "$WARNING" 15 60
     if [ $? -ne 0 ]
     then
         clear
@@ -48,7 +48,7 @@ authorization()
 {
     while test -e /tmp
     do
-        dialog --backtitle "${STARTCMD}" --title "Anmeldung" --cancel-label "Beenden" --inputbox "Bitte geben Sie Ihren Benutzernamen ein:\n" 10 60 2> /tmp/username
+        dialog --backtitle "${CTOOLNAME}" --title "Anmeldung" --cancel-label "Beenden" --inputbox "Bitte geben Sie Ihren Benutzernamen ein:\n" 10 60 2> /tmp/username
 
         if [ $? -eq 1 ]; then
                 clear
@@ -61,11 +61,11 @@ authorization()
                 USERNAME="Administrator"
         fi
         if [ ! "$USERNAME" ]; then
-                dialog --backtitle "${STARTCMD}" --title "Anmeldung" --msgbox "Der Benutzername $USERNAME ist ungueltig!" 15 60
+                dialog --backtitle "${CTOOLNAME}" --title "Anmeldung" --msgbox "Der Benutzername $USERNAME ist ungueltig!" 15 60
         elif [ "$USERNAME" = "root" ]; then
-                dialog --backtitle "${STARTCMD}" --title "Anmeldung" --msgbox "Die Anmeldung an cloneTool als $USERNAME ist nicht möglich!" 15 60
+                dialog --backtitle "${CTOOLNAME}" --title "Anmeldung" --msgbox "Die Anmeldung an cloneTool als $USERNAME ist nicht möglich!" 15 60
         else
-                dialog --backtitle "${STARTCMD}" --title "Anmeldung" --no-cancel \
+                dialog --backtitle "${CTOOLNAME}" --title "Anmeldung" --no-cancel \
                        --insecure --passwordbox "Bitte geben Sie das Passwort fuer $USERNAME ein:\n" 10 60 2> /tmp/userpassword
                 echo "username=$USERNAME" >  /tmp/credentials;
                 echo -n "password="       >> /tmp/credentials; cat /tmp/userpassword >> /tmp/credentials;
@@ -85,7 +85,7 @@ authorization()
                         return
                 fi
                 sleep $SLEEP
-                dialog --backtitle "${STARTCMD}" --title "Anmeldung" --yesno "$WARNING" 15 60
+                dialog --backtitle "${CTOOLNAME}" --title "Anmeldung" --yesno "$WARNING" 15 60
                 if [ $? -ne 0 ]; then
                         clear
                         exit 0
@@ -106,7 +106,7 @@ register()
 	     ROOMS="${ROOMS} $j $ON "
 	     ON="off"
 	done
-	dialog --backtitle "CloneTool 4.0" --title "Rechner muss registriert werden"  --nocancel --radiolist "Waehlen Sie den gewuenschten Raum" 18 60 8  $ROOMS 2> /tmp/clone.input
+	dialog --backtitle "${CTOOLNAME}" --title "Rechner muss registriert werden"  --nocancel --radiolist "Waehlen Sie den gewuenschten Raum" 18 60 8  $ROOMS 2> /tmp/clone.input
 	ROOM=$(cat /tmp/clone.input)
 
 	#Get the list of the available devices in the room

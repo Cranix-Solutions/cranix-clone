@@ -24,11 +24,6 @@ then
         export ITOOL="partclone"
 fi
 ## Check for some boot parameter
-if [ -z "${STARTCMD}" ]
-then
-        export STARTCMD="clone"
-fi
-## Check for some boot parameter
 if [ -z "${SERVER}" ]
 then
         export SERVER="admin"
@@ -58,7 +53,7 @@ else
 	if [ -z "${HOSTNAME}" ]; then
 		register
 	fi
-	/bin/bash ${CDEBUG} /root/${STARTCMD}.sh
+	/bin/bash ${CDEBUG} /root/clone.sh
 	curl --insecure -X DELETE --header 'Content-Type: application/json' --header 'Accept: application/json' --header "Authorization: Bearer $TOKEN" "https://${SERVER}/api/sessions/$TOKEN"
 	exit 0
 fi
