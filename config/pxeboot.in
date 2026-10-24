@@ -5,6 +5,6 @@ ui              gfxboot bootlogo
 
 LABEL	cloneTool
         kernel boot/linux
-        append initrd=boot/initrd root=live:ftp://install/boot/squashfs.img ip=dhcp init=/bin/start_itool STARTCMD=clone SLEEP=1 PARTITIONS=#PARTITIONS# MODUS=AUTO MULTICAST=1
+        append initrd=boot/initrd root=live:ftp://install/boot/squashfs.img ip=dhcp init=/bin/start_itool STARTCMD=clone SLEEP=1 PARTITIONS=#PARTITIONS# MODUS=AUTO MULTICAST=1 2
         IPAPPEND 2
 
