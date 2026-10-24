@@ -23,7 +23,7 @@ install:
 	mkdir -p -m 2770 $(DESTDIR)/srv/itool/images/manual
 	mkdir -p -m 2770 $(DESTDIR)/srv/itool/hwinfo
 	mkdir -p -m 2775 $(DESTDIR)/srv/itool/ROOT/root
-	mkdir -p -m 2775 $(DESTDIR)/srv/ftp/agama/
+	mkdir -p -m 2775 $(DESTDIR)/srv/ftp/{agama,bin,scripts}
 
 	mkdir -p $(DESTDIR)/etc/xinetd.d/
 	mkdir -p $(DESTDIR)/srv/itool/config
@@ -31,7 +31,8 @@ install:
 	install -m 444 $(INSTUSER) config/xinetd.d.tftp.in $(DESTDIR)/etc/xinetd.d/tftp.in
 	install -m 444 $(INSTUSER) config/*templ           $(DESTDIR)/srv/itool/config
 	install -m 400 $(INSTUSER) config/clonetool.id_rsa $(DESTDIR)/srv/itool/config
-	install -m 755 $(INSTUSER) scripts/*               $(DESTDIR)/srv/ftp/itool/scripts
+	install -m 755 $(INSTUSER) ftp/bin/*               $(DESTDIR)/srv/ftp/bin/scripts
+	install -m 755 $(INSTUSER) ftp/scripts/*           $(DESTDIR)/srv/ftp/itool/scripts
 	
 	#configure some executables
 	mkdir -p $(DESTDIR)/usr/sbin
@@ -40,7 +41,7 @@ install:
 dist:
 	if [ -e $(PACKAGE) ]; then rm -rf $(PACKAGE); fi
 	mkdir $(PACKAGE)
-	cp -rp Makefile bin config scripts tftp $(PACKAGE)
+	cp -rp Makefile bin config ftp tftp $(PACKAGE)
 	sed -i "s/#DATE#/$(DATE)/"       $(PACKAGE)/scripts/login
 	tar jcpf $(PACKAGE).tar.bz2 $(PACKAGE)
 	xterm -e git log --raw &

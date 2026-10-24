@@ -6,7 +6,6 @@ export CTOOLNAME="CRANIX Clone Tool ${IVERSION}"
 
 mkdir -p /mnt/itool
 umount /mnt/itool > /dev/null 2>&1
-rm -Rf /tmp/* > /dev/null 2>&1
 
 chmod 700 /root/.ssh/
 chmod 600 /root/.ssh/authorized_keys
