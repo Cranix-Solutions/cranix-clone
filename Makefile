@@ -42,7 +42,7 @@ dist:
 	if [ -e $(PACKAGE) ]; then rm -rf $(PACKAGE); fi
 	mkdir $(PACKAGE)
 	cp -rp Makefile bin config ftp tftp $(PACKAGE)
-	sed -i "s/#DATE#/$(DATE)/"       $(PACKAGE)/scripts/login
+	sed -i "s/#DATE#/$(DATE)/"       $(PACKAGE)/ftp/scripts/login
 	tar jcpf $(PACKAGE).tar.bz2 $(PACKAGE)
 	xterm -e git log --raw &
 	if [ -d $(REPO)/$(PACKAGE) ] ; then \
