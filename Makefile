@@ -8,11 +8,11 @@ REPO		= ~/OSC/home:pvarkoly:CRANIX/
 install:
 	#configure tftp boot template service
 	mkdir -p $(DESTDIR)/usr/share/cranix/templates
-	install -m 444 $(INSTUSER)  config/pxeboot.in            $(DESTDIR)/usr/share/cranix/templates/pxeboot.in
-	install -m 444 $(INSTUSER)  config/efiboot.in            $(DESTDIR)/usr/share/cranix/templates/efiboot.in
+	install -m 444 $(INSTUSER)  config/pxeboot $(DESTDIR)/usr/share/cranix/templates/pxeboot
+	install -m 444 $(INSTUSER)  config/efiboot $(DESTDIR)/usr/share/cranix/templates/efiboot
 	#copy windows cleanup script
-	install -m 755 $(INSTUSER)  config/Win10_clean.ps1       $(DESTDIR)/usr/share/cranix/templates/
-	install -m 755 $(INSTUSER)  config/Win_clean.ps1         $(DESTDIR)/usr/share/cranix/templates/
+	install -m 755 $(INSTUSER)  config/Win10_clean.ps1 $(DESTDIR)/usr/share/cranix/templates/
+	install -m 755 $(INSTUSER)  config/Win_clean.ps1   $(DESTDIR)/usr/share/cranix/templates/
 
 	#configure tftp service
 	mkdir -p $(DESTDIR)/srv/tftp/
@@ -28,7 +28,7 @@ install:
 	mkdir -p $(DESTDIR)/etc/xinetd.d/
 	mkdir -p $(DESTDIR)/srv/itool/config
 	mkdir -p $(DESTDIR)/srv/ftp/itool/scripts
-	install -m 444 $(INSTUSER) config/xinetd.d.tftp.in $(DESTDIR)/etc/xinetd.d/tftp.in
+	install -m 444 $(INSTUSER) config/xinetd.d.tftp $(DESTDIR)/etc/xinetd.d/tftp
 	install -m 444 $(INSTUSER) config/*templ           $(DESTDIR)/srv/itool/config
 	install -m 400 $(INSTUSER) config/clonetool.id_rsa $(DESTDIR)/srv/itool/config
 	install -m 755 $(INSTUSER) ftp/bin/*               $(DESTDIR)/srv/ftp/bin
